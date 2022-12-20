@@ -770,7 +770,7 @@ projection</p>
         <tr>
           <td><code>out_proj</code></td>
           <td>
-                <code>int | str</code>
+                <code><span title="typing.Union">Union</span>[int, str]</code>
           </td>
           <td><p>int,str           - (optional) EPSG code for output projection</p></td>
           <td>
@@ -889,7 +889,7 @@ projection</p>
         <span class="n">aoi</span><span class="p">,</span> 
         <span class="n">los</span><span class="p">,</span> 
         <span class="n">height_levels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-        <span class="n">out_proj</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="o">=</span><span class="mi">4326</span><span class="p">,</span> 
+        <span class="n">out_proj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span><span class="mi">4326</span><span class="p">,</span> 
         <span class="n">cube_spacing_m</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">look_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> 
     <span class="p">):</span>
