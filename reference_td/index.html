@@ -504,10 +504,10 @@
 <a id="RAiDER.delay"></a>
   <div class="doc doc-contents first">
   
-      <p>RAiDER tropospheric delay calculation </p>
-<p>This module provides the main RAiDER functionality for calculating 
-tropospheric wet and hydrostatic delays from a weather model. Weather 
-models are accessed as NETCDF files and should have "wet" "hydro" 
+      <p>RAiDER tropospheric delay calculation</p>
+<p>This module provides the main RAiDER functionality for calculating
+tropospheric wet and hydrostatic delays from a weather model. Weather
+models are accessed as NETCDF files and should have "wet" "hydro"
 "wet_total" and "hydro_total" fields specified.</p>
 
   
@@ -621,14 +621,7 @@ projection</p>
 
       <details class="quote">
         <summary>Source code in <code>RAiDER/delay.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">265</span>
 <span class="normal">266</span>
 <span class="normal">267</span>
 <span class="normal">268</span>
@@ -655,7 +648,14 @@ projection</p>
 <span class="normal">289</span>
 <span class="normal">290</span>
 <span class="normal">291</span>
-<span class="normal">292</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">transformPoints</span><span class="p">(</span><span class="n">lats</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">lons</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">hgts</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">old_proj</span><span class="p">:</span> <span class="n">CRS</span><span class="p">,</span> <span class="n">new_proj</span><span class="p">:</span> <span class="n">CRS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">transformPoints</span><span class="p">(</span><span class="n">lats</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">lons</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">hgts</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">old_proj</span><span class="p">:</span> <span class="n">CRS</span><span class="p">,</span> <span class="n">new_proj</span><span class="p">:</span> <span class="n">CRS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Transform lat/lon/hgt data to an array of points in a new</span>
 <span class="sd">    projection</span>
@@ -883,15 +883,19 @@ projection</p>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
-<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">tropo_delay</span><span class="p">(</span>
-        <span class="n">dt</span><span class="p">,</span> 
-        <span class="n">weather_model_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
-        <span class="n">aoi</span><span class="p">,</span> 
-        <span class="n">los</span><span class="p">,</span> 
-        <span class="n">height_levels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-        <span class="n">out_proj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span><span class="mi">4326</span><span class="p">,</span> 
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">tropo_delay</span><span class="p">(</span>
+        <span class="n">dt</span><span class="p">,</span>
+        <span class="n">weather_model_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">aoi</span><span class="p">,</span>
+        <span class="n">los</span><span class="p">,</span>
+        <span class="n">height_levels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">out_proj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span><span class="mi">4326</span><span class="p">,</span>
         <span class="n">cube_spacing_m</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">look_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> 
+        <span class="n">look_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>
     <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate integrated delays on query points.</span>
@@ -911,8 +915,12 @@ projection</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># get heights</span>
     <span class="k">if</span> <span class="n">height_levels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">xarray</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">weather_model_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
-            <span class="n">height_levels</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">z</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">if</span> <span class="n">aoi</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Geocube&#39;</span><span class="p">:</span>
+            <span class="n">height_levels</span> <span class="o">=</span> <span class="n">aoi</span><span class="o">.</span><span class="n">readZ</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">xarray</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">weather_model_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+                <span class="n">height_levels</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">z</span><span class="o">.</span><span class="n">values</span>
 
     <span class="c1">#TODO: expose this as library function</span>
     <span class="n">ds</span> <span class="o">=</span> <span class="n">_get_delays_on_cube</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">weather_model_file</span><span class="p">,</span> <span class="n">aoi</span><span class="o">.</span><span class="n">bounds</span><span class="p">(),</span> <span class="n">height_levels</span><span class="p">,</span>

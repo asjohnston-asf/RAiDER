@@ -631,7 +631,7 @@
 
 
 <h3 id="RAiDER.processWM.prepareWeatherModel" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">RAiDER</span><span class="o">.</span><span class="n">processWM</span><span class="o">.</span><span class="n">prepareWeatherModel</span><span class="p">(</span><span class="n">weather_model</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wmLoc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ll_bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">download_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">makePlots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">force_download</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">RAiDER</span><span class="o">.</span><span class="n">processWM</span><span class="o">.</span><span class="n">prepareWeatherModel</span><span class="p">(</span><span class="n">weather_model</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">wmLoc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ll_bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">download_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">makePlots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">force_download</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -666,7 +666,7 @@
           </td>
           <td><p>datetime                - Python datetime to request. Will be rounded to nearest available time</p></td>
           <td>
-                <code>None</code>
+              <em>required</em>
           </td>
         </tr>
         <tr>
@@ -852,15 +852,9 @@
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">prepareWeatherModel</span><span class="p">(</span>
+<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">prepareWeatherModel</span><span class="p">(</span>
         <span class="n">weather_model</span><span class="p">,</span>
-        <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">,</span>
         <span class="n">wmLoc</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">ll_bounds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">download_only</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -879,7 +873,7 @@
 <span class="sd">        force_download: bool          - True if you want to download even when the weather model exists</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        str: filename of the netcdf file to which the weather model has been written </span>
+<span class="sd">        str: filename of the netcdf file to which the weather model has been written</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Ensure the file output location exists</span>
     <span class="k">if</span> <span class="n">wmLoc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -887,22 +881,16 @@
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">wmLoc</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># check whether weather model files are supplied or should be downloaded</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">weather_model</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">wmLoc</span><span class="p">)</span>
+
     <span class="n">download_flag</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">weather_model</span><span class="o">.</span><span class="n">files</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="s1">&#39;prepareWeatherModel: Either a file or a time must be specified&#39;</span>
-            <span class="p">)</span>
-        <span class="n">weather_model</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">wmLoc</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">weather_model</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">force_download</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="s1">&#39;Weather model already exists, please remove it (&quot;</span><span class="si">%s</span><span class="s1">&quot;) if you want &#39;</span>
-                    <span class="s1">&#39;to download a new one.&#39;</span><span class="p">,</span> <span class="n">weather_model</span><span class="o">.</span><span class="n">files</span>
-                <span class="p">)</span>
-                <span class="n">download_flag</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force_download</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s1">&#39;Weather model already exists, please remove it (&quot;</span><span class="si">%s</span><span class="s1">&quot;) if you want &#39;</span>
+            <span class="s1">&#39;to download a new one.&#39;</span><span class="p">,</span> <span class="n">weather_model</span><span class="o">.</span><span class="n">files</span>
+        <span class="p">)</span>
         <span class="n">download_flag</span> <span class="o">=</span> <span class="kc">False</span>
+
 
     <span class="c1"># if no weather model files supplied, check the standard location</span>
     <span class="k">if</span> <span class="n">download_flag</span><span class="p">:</span>
