@@ -274,8 +274,8 @@ def test_azimuth_timing_interp_against_center_time_interp(weather_model_name: st
         'RAiDER.s1_azimuth_timing.get_orbits_from_slc_ids',
         side_effect=[
             # For azimuth time
-            [Path(orbit_dict_for_azimuth_time_test['reference'])],
-            [Path(orbit_dict_for_azimuth_time_test['secondary']), Path(orbit_dict_for_azimuth_time_test['secondary'])],
+            [str(orbit_dict_for_azimuth_time_test['reference'])],
+            [str(orbit_dict_for_azimuth_time_test['secondary']), str(orbit_dict_for_azimuth_time_test['secondary'])],
         ]
     )
 
@@ -428,16 +428,6 @@ def test_provenance_metadata_for_tropo_group(weather_model_name: str,
     out_path = shutil.copy(gunw_azimuth_test, tmp_path / out)
 
     if interp_method == 'azimuth_time_grid':
-        # For prepGUNW
-        side_effect = [
-             # center-time
-            [Path(orbit_dict_for_azimuth_time_test['reference'])],
-             # azimuth-time
-            [Path(orbit_dict_for_azimuth_time_test['reference'])],
-        ]
-        mocker.patch('RAiDER.s1_azimuth_timing.get_orbits_from_slc_ids',
-                     side_effect=side_effect)
-
         # These outputs are not needed since the orbits are specified above
         mocker.patch('RAiDER.s1_azimuth_timing.get_slc_id_from_point_and_time',
                      side_effect=[
@@ -452,8 +442,8 @@ def test_provenance_metadata_for_tropo_group(weather_model_name: str,
             'RAiDER.s1_azimuth_timing.get_orbits_from_slc_ids',
             side_effect=[
                 # For azimuth time
-                [Path(orbit_dict_for_azimuth_time_test['reference'])],
-                [Path(orbit_dict_for_azimuth_time_test['secondary']), Path(orbit_dict_for_azimuth_time_test['secondary'])],
+                [str(orbit_dict_for_azimuth_time_test['reference'])],
+                [str(orbit_dict_for_azimuth_time_test['secondary']), str(orbit_dict_for_azimuth_time_test['secondary'])],
             ]
         )
     weather_model_path_dict = (weather_model_dict_for_center_time_test
@@ -544,8 +534,8 @@ def test_GUNW_workflow_fails_if_a_download_fails(gunw_azimuth_test, orbit_dict_f
         'RAiDER.s1_azimuth_timing.get_orbits_from_slc_ids',
         side_effect=[
             # For azimuth time
-            [Path(orbit_dict_for_azimuth_time_test['reference'])],
-            [Path(orbit_dict_for_azimuth_time_test['secondary']), Path(orbit_dict_for_azimuth_time_test['secondary'])],
+            [str(orbit_dict_for_azimuth_time_test['reference'])],
+            [str(orbit_dict_for_azimuth_time_test['secondary']), str(orbit_dict_for_azimuth_time_test['secondary'])],
         ]
     )
 
